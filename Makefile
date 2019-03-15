@@ -1,5 +1,5 @@
-C_SOURCES = $(wildcard *.c driver/*.c)
-C_HEADERS = $(wildcard *.h driver/*.h)
+C_SOURCES = $(wildcard *.c driver/*.c libc/*.c)
+C_HEADERS = $(wildcard *.h driver/*.h libc/*.h)
 OBJECTS = ${C_SOURCES:.c=.o loader.o}
 
 CC = i386-elf-gcc

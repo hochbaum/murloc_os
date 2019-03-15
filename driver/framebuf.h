@@ -1,6 +1,8 @@
 #ifndef MURLOC_OS_FRAMEBUF_H
 #define MURLOC_OS_FRAMEBUF_H
 
+#include "../libc/stdint.h"
+
 #define FB_FRAMEBUF_ADDR 0x00B8000
 
 #define FB_BLACK        0x0
@@ -28,12 +30,12 @@
 
 #define FB_COLOR_COMBINE(fg, bg)    (((bg & 0x0F) << 4) | (fg & 0x0F))
 
-#define FB_MAX_COLUMNS 100
-#define FB_MAX_ROWS     16
+#define FB_MAX_COLUMNS 80
+#define FB_MAX_ROWS    25
 #define FB_SCREEN_SIZE (FB_MAX_COLUMNS * FB_MAX_ROWS)
 
-#define FB_CURSOR_CALC_SHIFT(offset)            ((offset / 2) >> 8)
-#define FB_CURSOR_CALC_OFFSET(col, row)         (2 * (row * FB_MAX_COLUMNS + col))
+#define FB_CURSOR_CALC_SHIFT(offset)            ((uint8_t)((offset / 2) >> 8))
+#define FB_CURSOR_CALC_OFFSET(col, row)         ((uint32_t)((2 * (row * FB_MAX_COLUMNS + col))))
 #define FB_CURSOR_CALC_ROW_OFFSET(offset)       ((offset / 2) * FB_MAX_COLUMNS)
 #define FB_CURSOR_CALC_COLUMN_OFFSET(offset)    ((offset - (FB_CURSOR_CALC_ROW_OFFSET(offset) * 2 * FB_MAX_COLUMNS)) / 2)
 
@@ -57,7 +59,7 @@
  *
  * @return The new offset.
  */
-int fb_putc(const char c, int column, int row, char attrib);
+uint32_t fb_putc(const unsigned char c, int32_t column, int32_t row, uint8_t attrib);
 
 /*!
  * Prints the specified string at the given location using the
@@ -73,7 +75,7 @@ int fb_putc(const char c, int column, int row, char attrib);
  * @param row The Y coordinate of the first character of the string.
  * @param attrib Foreground and background color.
  */
-void fb_puts(const char *str, int column, int row, char attrib);
+void fb_puts(const char *str, int32_t column, int32_t row, uint8_t attrib);
 
 /*!
  * Clears the screen.
@@ -87,13 +89,13 @@ void fb_clear();
  *
  * @param pos The new position for the cursor.
  */
-void fb_cursor_move(const unsigned short pos);
+void fb_cursor_move(const uint16_t pos);
 
-/**
+/*!
  * Returns the cursor's current offset.
  *
  * @return The cursor offset.
  */
-int fb_cursor_offset();
+uint32_t fb_cursor_offset();
 
 #endif //MURLOC_OS_FRAMEBUF_H

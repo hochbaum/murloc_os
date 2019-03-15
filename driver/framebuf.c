@@ -1,21 +1,22 @@
 #include "framebuf.h"
 #include "io.h"
+#include "../libc/string.h"
 
-int fb_putc(const char c, int column, int row, char attrib)
+uint32_t fb_putc(const unsigned char c, int32_t column, int32_t row, uint8_t attrib)
 {
 	if (!attrib)
 	{
 		attrib = FB_DEFAULT_ATTRIB;
 	}
 
-	unsigned char *framebuf = (unsigned char *) FB_FRAMEBUF_ADDR;
-
-	int offset = (column >= 0 && row >= 0) ? FB_CURSOR_CALC_OFFSET(column, row) : fb_cursor_offset();
+	uint8_t *framebuf = (uint8_t *) FB_FRAMEBUF_ADDR;
+	uint32_t offset = (column >= 0 && row >= 0) ? FB_CURSOR_CALC_OFFSET(column, row) : fb_cursor_offset();
 
 	switch (c)
 	{
 		case '\n': {
-			offset = FB_CURSOR_CALC_OFFSET(0, (offset / (2 * FB_MAX_COLUMNS)));
+			uint32_t rows = offset / (2 * FB_MAX_COLUMNS);
+			offset = FB_CURSOR_CALC_OFFSET(0, rows + 1);
 			break;
 		}
 
@@ -33,13 +34,30 @@ int fb_putc(const char c, int column, int row, char attrib)
 		}
 	}
 
+	if (offset >= FB_MAX_ROWS * FB_MAX_COLUMNS * 2)
+	{
+		for (int i = 1; i < FB_MAX_ROWS; i++)
+		{
+			memcpy((uint32_t *) FB_CURSOR_CALC_OFFSET(0, i) + FB_FRAMEBUF_ADDR, (uint32_t *) FB_CURSOR_CALC_OFFSET(0, i - 1) + FB_FRAMEBUF_ADDR, FB_MAX_COLUMNS * 2);
+		}
+
+		uint8_t *last_row = (uint8_t *) FB_CURSOR_CALC_OFFSET(0, FB_MAX_ROWS - 1) + FB_FRAMEBUF_ADDR;
+
+		for (int i = 0; i < FB_MAX_COLUMNS * 2; i++)
+		{
+			last_row[i] = 0;
+		}
+
+		offset -= 2 * FB_MAX_COLUMNS;
+	}
+
 	fb_cursor_move(offset);
 	return offset;
 }
 
-void fb_puts(const char *str, int column, int row, char attrib)
+void fb_puts(const char *str, int32_t column, int32_t row, uint8_t attrib)
 {
-	int offset;
+	uint32_t offset;
 	if (column < 0 || row < 0)
 	{
 		offset = fb_cursor_offset();
@@ -57,8 +75,8 @@ void fb_puts(const char *str, int column, int row, char attrib)
 
 void fb_clear()
 {
-	unsigned char *framebuf = (unsigned char *) FB_FRAMEBUF_ADDR;
-	char black = FB_COLOR_COMBINE(FB_DEFAULT_BG, FB_DEFAULT_BG);
+	uint8_t *framebuf = (uint8_t *) FB_FRAMEBUF_ADDR;
+	uint8_t black = FB_COLOR_COMBINE(FB_DEFAULT_BG, FB_DEFAULT_BG);
 
 	for (int i = 0; i < FB_SCREEN_SIZE; i++)
 	{
@@ -69,18 +87,18 @@ void fb_clear()
 	fb_cursor_move(FB_CURSOR_CALC_OFFSET(0, 0));
 }
 
-void fb_cursor_move(const unsigned short pos)
+void fb_cursor_move(const uint16_t pos)
 {
 	outb(FB_PORT_COMMAND, FB_COMMAND_HIGH_BYTE);
 	outb(FB_PORT_DATA, FB_CURSOR_CALC_SHIFT(pos));
 	outb(FB_PORT_COMMAND, FB_COMMAND_LOW_BYTE);
-	outb(FB_PORT_DATA, (pos / 2) & 0xFF);
+	outb(FB_PORT_DATA, (uint8_t) ((pos / 2) & 0xFF));
 }
 
-int fb_cursor_offset()
+uint32_t fb_cursor_offset()
 {
 	outb(FB_PORT_COMMAND, FB_COMMAND_HIGH_BYTE);
-	int offset = inb(FB_PORT_DATA) << 8;
+	uint32_t offset = inb(FB_PORT_DATA) << 8;
 	outb(FB_PORT_COMMAND, FB_COMMAND_LOW_BYTE);
 	return (offset + inb(FB_PORT_DATA)) * 2;
 }

@@ -1,11 +1,11 @@
 #include "io.h"
 
-void outb(unsigned short port, unsigned char data)
+void outb(uint16_t port, uint8_t data)
 {
 	asm("out %%al, %%dx" : : "a" (data), "d" (port));
 }
 
-unsigned char inb(unsigned short port)
+uint8_t inb(uint16_t port)
 {
 	unsigned char byte;
 	asm("in %%dx, %%al" : "=a" (byte) : "d" (port));
