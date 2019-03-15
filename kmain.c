@@ -1,8 +1,7 @@
-#include "driver/framebuf.h"
+#include "libc/stdio.h"
 
 int kmain()
 {
-	fb_clear();
-	fb_puts("this is a test\nlol", -1, -1, FB_DEFAULT_ATTRIB);
+	printf("got %s %s 100%%!", "printf", "working");
 	return 0;
 }
