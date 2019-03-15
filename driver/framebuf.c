@@ -110,9 +110,9 @@ void fb_cursor_move(const uint16_t pos)
 
 uint32_t fb_cursor_offset()
 {
-	outb(FB_PORT_COMMAND, 14);
+	outb(FB_PORT_COMMAND, FB_COMMAND_HIGH_BYTE);
 	uint32_t offset = inb(FB_PORT_DATA) << 8;
-	outb(FB_PORT_COMMAND, 15);
+	outb(FB_PORT_COMMAND, FB_COMMAND_LOW_BYTE);
 	offset += inb(FB_PORT_DATA);
 	return offset * 2;
 }
