@@ -28,16 +28,14 @@
 #define FB_COMMAND_HIGH_BYTE    14
 #define FB_COMMAND_LOW_BYTE     15
 
-#define FB_COLOR_COMBINE(fg, bg)    (((bg & 0x0F) << 4) | (fg & 0x0F))
+#define FB_COLOR_COMBINE(fg,bg)    (((bg & 0x0F) << 4) | (fg & 0x0F))
 
 #define FB_MAX_COLUMNS 80
 #define FB_MAX_ROWS    25
 #define FB_SCREEN_SIZE (FB_MAX_COLUMNS * FB_MAX_ROWS)
 
-#define FB_CURSOR_CALC_SHIFT(offset)            ((uint8_t)((offset / 2) >> 8))
-#define FB_CURSOR_CALC_OFFSET(col, row)         ((uint32_t)((2 * (row * FB_MAX_COLUMNS + col))))
-#define FB_CURSOR_CALC_ROW_OFFSET(offset)       ((offset / 2) * FB_MAX_COLUMNS)
-#define FB_CURSOR_CALC_COLUMN_OFFSET(offset)    ((offset - (FB_CURSOR_CALC_ROW_OFFSET(offset) * 2 * FB_MAX_COLUMNS)) / 2)
+#define FB_CURSOR_CALC_ROW_OFFSET(offset)       (offset / (2 * FB_MAX_COLUMNS))
+#define FB_CURSOR_CALC_COLUMN_OFFSET(offset)    ((offset - ((offset / (2 * FB_MAX_COLUMNS)) * 2 * FB_MAX_COLUMNS)) / 2)
 
 #define FB_DEFAULT_FG       FB_L_GRAY
 #define FB_DEFAULT_BG       FB_BLACK

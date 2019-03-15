@@ -20,7 +20,7 @@ void printf(char *fmt, ...)
 		switch (*++p)
 		{
 			case 's': {
-				sval = va_arg(ap, char*);
+				sval = va_arg(ap, char*); /* in case you are using CLion, it might complain here? */
 				fb_puts(sval, -1, -1, FB_DEFAULT_ATTRIB);
 				break;
 			}

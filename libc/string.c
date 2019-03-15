@@ -25,3 +25,48 @@ void *memcpy(void *dest, const void *src, const size_t num)
 
 	return dest;
 }
+
+size_t strlen(const char* str)
+{
+	size_t size = 0;
+	for (; *str; str++)
+	{
+		size++;
+	}
+
+	return size;
+}
+
+void reverse(char *str)
+{
+	int i, j, k;
+	for (i = 0, j = strlen(str) - 1; i < j; i++, j--)
+	{
+		k = str[i];
+		str[i] = str[j];
+		str[j] = k;
+	}
+}
+
+void itoa(char *str, int n)
+{
+	int sign = n;
+	if (sign < 0)
+	{
+		n = -n;
+	}
+
+	int i = 0;
+	do
+	{
+		str[i++] = n % 10 + '0';
+	} while ((n /= 10) > 0);
+
+	if (sign < 0)
+	{
+		str[i++] = '-';
+	}
+
+	str[i] = '\0';
+	reverse(str);
+}
