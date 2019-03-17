@@ -1,11 +1,13 @@
 #include "stdio.h"
 #include "stdint.h"
 #include "../driver/framebuf.h"
+#include "string.h"
 
 void printf(char *fmt, ...)
 {
 	va_list ap;
 	char *sval;
+	uint32_t uival;
 
 	va_start(ap, fmt);
 
@@ -27,6 +29,14 @@ void printf(char *fmt, ...)
 
 			case '%': {
 				fb_putc('%', -1, -1, FB_DEFAULT_ATTRIB);
+				break;
+			}
+
+			case 'd': {
+				uival = va_arg(ap, uint32_t);
+				char buf[16];
+				itoa(buf, uival);
+				fb_puts(buf, -1, -1, FB_DEFAULT_ATTRIB);
 				break;
 			}
 		}
