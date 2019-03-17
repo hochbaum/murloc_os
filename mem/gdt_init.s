@@ -1,8 +1,10 @@
-extern gdt
-global _gdt_flush
+[bits 32]
 
-_gdt_flush:
-	lgdt [gdt]
+global gdt_flush
+
+gdt_flush:
+	mov eax, DWORD [esp + 4]
+	lgdt [eax]
 	mov ax, 0x10
 	mov ds, ax
 	mov es, ax

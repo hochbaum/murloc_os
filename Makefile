@@ -1,10 +1,12 @@
-C_SOURCES = $(wildcard *.c driver/*.c libc/*.c)
-C_HEADERS = $(wildcard *.h driver/*.h libc/*.h)
-OBJECTS = ${C_SOURCES:.c=.o loader.o}
+ASM_SOURCES = $(wildcard *.s mem/*.s)
+C_SOURCES = $(wildcard *.c driver/*.c libc/*.c mem/*.c)
+C_HEADERS = $(wildcard *.h driver/*.h libc/*.h mem/*.h)
+OBJECTS = ${C_SOURCES:.c=.o} ${ASM_SOURCES:.s=.o}
 
 CC = i386-elf-gcc
 AS = nasm
 LD = /usr/local/i386elfgcc/bin/i386-elf-ld
+GDB = /usr/local/i386elfgcc/bin/i386-elf-gdb
 
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
 LDFLAGS = -T link.ld -melf_i386
@@ -29,13 +31,13 @@ os.iso: kernel.elf
 	        iso
 
 run: os.iso
-	qemu-system-i386 -boot d -cdrom murloc.iso -m 512
+	qemu-system-i386 -boot d -cdrom murloc.iso -m 4096
 
 debug: os.iso
-	qemu-system-i386 -boot d -cdrom murloc.iso -m 512 -s
-	gdb -ex "target remote :1234"
+	qemu-system-i386 -boot d -cdrom murloc.iso -m 4096 -s &
+	$(GDB) -ex "target remote :1234" -ex "symbol-file kernel.elf"
 
-%.o: %.c ${HEADERS}
+%.o: %.c $(C_HEADERS)
 	$(CC) $(CFLAGS) $< -o $@
 
 %.o: %.s
