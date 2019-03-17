@@ -1,6 +1,6 @@
 ASM_SOURCES = $(wildcard *.s mem/*.s)
-C_SOURCES = $(wildcard *.c driver/*.c libc/*.c mem/*.c)
-C_HEADERS = $(wildcard *.h driver/*.h libc/*.h mem/*.h)
+C_SOURCES = $(wildcard *.c driver/*.c libc/*.c mem/*.c cpu/*.c)
+C_HEADERS = $(wildcard *.h driver/*.h libc/*.h mem/*.h cpu/*.h)
 OBJECTS = ${C_SOURCES:.c=.o} ${ASM_SOURCES:.s=.o}
 
 CC = i386-elf-gcc
