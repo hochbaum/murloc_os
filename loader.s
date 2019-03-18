@@ -11,11 +11,13 @@ align 4
 kernel_stack:
     resb KERNEL_STACK_SIZE
 
-section .text
+section .__mbHeader
 align 4
     dd MAGIC_NUMBER
     dd FLAGS
     dd CHECKSUM
+
+section .text
 
 mov esp, kernel_stack + KERNEL_STACK_SIZE
 

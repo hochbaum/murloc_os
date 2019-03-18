@@ -18,6 +18,8 @@ interrupt_handler_%1:
 	jmp interrupt_handler_common
 %endmacro
 
+section .text
+
 interrupt_handler_common:
 	push esp
 

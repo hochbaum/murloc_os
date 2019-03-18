@@ -47,19 +47,19 @@ uint32_t fb_putc(const unsigned char c, int32_t column, int32_t row, uint8_t att
 		}
 	}
 
-	if (offset >= FB_MAX_ROWS * FB_MAX_COLUMNS * 2)
+	if (offset >= FB_MAX_COLUMNS * FB_MAX_ROWS * 2)
 	{
 		for (int i = 1; i < FB_MAX_ROWS; i++)
 		{
-			memcpy((uint32_t *) cursor_calc_offset(0, i) + FB_FRAMEBUF_ADDR,
-			       (uint32_t *) cursor_calc_offset(0, i - 1) + FB_FRAMEBUF_ADDR, FB_MAX_COLUMNS * 2);
+			memcpy((uint8_t *) (cursor_calc_offset(0, i - 1) + FB_FRAMEBUF_ADDR),
+			       (uint8_t *) (cursor_calc_offset(0, i) + FB_FRAMEBUF_ADDR), FB_MAX_COLUMNS * 2);
 		}
 
-		uint8_t *last_row = (uint8_t *) cursor_calc_offset(0, FB_MAX_ROWS - 1) + FB_FRAMEBUF_ADDR;
+		uint8_t *blank = (uint8_t *) (cursor_calc_offset(0, FB_MAX_ROWS - 1) + FB_FRAMEBUF_ADDR);
 
 		for (int i = 0; i < FB_MAX_COLUMNS * 2; i++)
 		{
-			last_row[i] = 0;
+			blank[i] = 0;
 		}
 
 		offset -= 2 * FB_MAX_COLUMNS;

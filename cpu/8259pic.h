@@ -1,6 +1,8 @@
 #ifndef MURLOC_OS_PIC_H
 #define MURLOC_OS_PIC_H
 
+#include "../libc/stdint.h"
+
 #define PIC1                0x20
 #define PIC2                0xA0
 #define PIC1_COMMAND        PIC1
@@ -19,5 +21,19 @@
 #define ICW4_BUF_SLAVE      0x08
 #define ICW4_BUF_MASTER     0x0C
 #define ICW4_FULLY_NESTED   0x10
+
+#define PIC1_START_INTERRUPT 0x20
+#define PIC2_START_INTERRUPT 0x28
+#define PIC2_END_INTERRUPT PIC2_START_INTERRUPT + 7
+#define PIC_ACK 0x20
+
+/*!
+ * This function sends an ack to the interrupt's
+ * PIC port as the interrupt will be blocked until
+ * we do so.
+ *
+ * @param interrupt The interrupt ID.
+ */
+void pic_acknowledge(uint32_t interrupt);
 
 #endif //MURLOC_OS_PIC_H

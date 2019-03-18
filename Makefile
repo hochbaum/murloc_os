@@ -30,7 +30,7 @@ os.iso: kernel.elf
 	        -o murloc.iso                   \
 	        iso
 
-run: os.iso
+run: clean os.iso
 	qemu-system-i386 -boot d -cdrom murloc.iso -m 4096
 
 debug: os.iso

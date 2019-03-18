@@ -1,7 +1,11 @@
-ENTRY (loader)
+ENTRY(loader)
 
 SECTIONS {
     . = 0x00100000;
+
+    .__mbHeader : {
+    	*(.__mbHeader)
+    }
 
     .text ALIGN (0x1000) :
     {

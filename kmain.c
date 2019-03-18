@@ -3,6 +3,7 @@
 #include "libc/string.h"
 #include "mem/gdt.h"
 #include "cpu/idt.h"
+#include "driver/timer.h"
 
 int kmain()
 {
@@ -10,6 +11,8 @@ int kmain()
 	idt_initialize();
 
 	interrupts_enable();
+
+	timer_initialize();
 
 	fb_clear();
 
@@ -20,7 +23,7 @@ int kmain()
 	printf("                   This is a small hobby project by myself,");
 	printf("\n             trying to understand how an OS works under the hood!\n");
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		printf("\n");
 	}
