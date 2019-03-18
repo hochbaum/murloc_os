@@ -1,4 +1,4 @@
-ASM_SOURCES = $(wildcard *.s mem/*.s)
+ASM_SOURCES = $(wildcard *.s mem/*.s cpu/*.s)
 C_SOURCES = $(wildcard *.c driver/*.c libc/*.c mem/*.c cpu/*.c)
 C_HEADERS = $(wildcard *.h driver/*.h libc/*.h mem/*.h cpu/*.h)
 OBJECTS = ${C_SOURCES:.c=.o} ${ASM_SOURCES:.s=.o}
