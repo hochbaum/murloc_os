@@ -6,7 +6,7 @@
 gdt_t gdt;
 gdt_entry_t gdt_entries[GDT_ENTRIES_MAX];
 
-void gdt_initizalize()
+void gdt_initialize()
 {
 	gdt.address = (uint32_t) &gdt_entries;
 	gdt.size = (sizeof(gdt_entry_t) * GDT_ENTRIES_MAX) - 1;

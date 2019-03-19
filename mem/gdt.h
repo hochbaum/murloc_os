@@ -41,7 +41,7 @@ extern void gdt_flush(gdt_t *gdt_ptr);
 /*!
  * Initializes the Global Descriptor Table, used for segmentation of the memory.
  */
-void gdt_initizalize();
+void gdt_initialize();
 
 /*!
  * Adds an entry to the Global Descriptor table.

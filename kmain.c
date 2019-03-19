@@ -7,7 +7,7 @@
 
 int kmain()
 {
-	gdt_initizalize();
+	gdt_initialize();
 	idt_initialize();
 
 	interrupts_enable();
