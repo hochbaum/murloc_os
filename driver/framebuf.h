@@ -80,6 +80,8 @@ void fb_puts(const char *str, int32_t column, int32_t row, uint8_t attrib);
  */
 void fb_clear();
 
+void fb_putbs();
+
 /*!
  * Moves the cursor to the specified position.
  *

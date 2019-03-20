@@ -1,4 +1,5 @@
 #include "io.h"
+#include "../libc/stdio.h"
 
 void serial_configure_baud_rate(uint16_t com, uint16_t divisor)
 {
@@ -27,4 +28,11 @@ uint8_t inb(uint16_t port)
 	unsigned char byte;
 	asm("in %%dx, %%al" : "=a" (byte) : "d" (port));
 	return byte;
+}
+
+void user_in(char* keybuffer)
+{
+	/* unused */
+	(void)keybuffer;
+	printf("> ");
 }

@@ -100,6 +100,15 @@ void fb_clear()
 	fb_cursor_move(cursor_calc_offset(0, 0));
 }
 
+void fb_putbs()
+{
+	uint32_t offset = fb_cursor_offset() - 2;
+	uint32_t row = FB_CURSOR_CALC_ROW_OFFSET(offset);
+	uint32_t column = FB_CURSOR_CALC_COLUMN_OFFSET(offset);
+
+	fb_putc(0x08, column, row, FB_DEFAULT_ATTRIB);
+}
+
 void fb_cursor_move(const uint16_t pos)
 {
 	outb(FB_PORT_COMMAND, FB_COMMAND_HIGH_BYTE);

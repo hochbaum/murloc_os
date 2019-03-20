@@ -35,4 +35,14 @@ void outb(uint16_t port, uint8_t data);
  */
 uint8_t inb(uint16_t port);
 
+/*!
+ * This function is called whenever we press return to
+ * input commands.
+ *
+ * Might be moved to another location later.
+ *
+ * @param keybuffer The pressed letters.
+ */
+void user_in(char* keybuffer);
+
 #endif //MURLOC_OS_PORTS_H

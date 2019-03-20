@@ -4,6 +4,7 @@
 #include "mem/gdt.h"
 #include "cpu/idt.h"
 #include "driver/timer.h"
+#include "driver/keyboard.h"
 
 int kmain()
 {
@@ -13,6 +14,7 @@ int kmain()
 	interrupts_enable();
 
 	timer_initialize();
+	keyboard_initialize();
 
 	fb_clear();
 
