@@ -46,18 +46,8 @@ static void handler_keyboard(cpu_state_t cpu_state, idt_response_t idt_response,
 			break;
 		}
 
-		case '\t': {
-			uint32_t len = strlen(keybuffer);
-
-			for (int i = 0; i < 4; i++)
-			{
-				keybuffer[len + i] = ' ';
-				fb_putc(' ', -1, -1, FB_DEFAULT_ATTRIB);
-			}
-
-			keybuffer[len + 4] = '\0';
+		case '\t':
 			break;
-		}
 
 		case KEYBOARD_KEY_SHIFT: {
 			shift_pressed = 1;
@@ -66,9 +56,11 @@ static void handler_keyboard(cpu_state_t cpu_state, idt_response_t idt_response,
 
 		case '\n': {
 			fb_puts("\n", -1, -1, FB_DEFAULT_ATTRIB);
-			memset(keybuffer, 0, 256);
 
-			user_in(keybuffer);
+			user_in(strip(keybuffer));
+
+			memset(keybuffer, 0, 256);
+			keybuffer[0] = '\0';
 			break;
 		}
 

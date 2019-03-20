@@ -1,5 +1,6 @@
 #include "io.h"
 #include "../libc/stdio.h"
+#include "../libc/string.h"
 
 void serial_configure_baud_rate(uint16_t com, uint16_t divisor)
 {
@@ -32,7 +33,13 @@ uint8_t inb(uint16_t port)
 
 void user_in(char* keybuffer)
 {
-	/* unused */
-	(void)keybuffer;
+	tolower(keybuffer);
+
+	if (!strcmp(keybuffer, "exit"))
+	{
+		printf("See you!");
+		asm("hlt");
+	}
+
 	printf("> ");
 }

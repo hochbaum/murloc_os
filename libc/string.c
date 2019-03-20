@@ -70,3 +70,47 @@ void itoa(char *str, int n)
 	str[i] = '\0';
 	reverse(str);
 }
+
+char *strip(char *str)
+{
+	size_t len = strlen(str);
+	char *p = str + len - 1;
+
+	while (p >= str && *p == ' ')
+	{
+		p--;
+	}
+
+	*(p + 1) = '\0';
+
+	while (*str && *str == ' ')
+	{
+		str++;
+	}
+
+	return str;
+}
+
+void tolower(char *str)
+{
+	for (; *str; str++)
+	{
+		if (*str >= 'A' && *str <= 'Z')
+		{
+			*str += 32;
+		}
+	}
+}
+
+int strcmp(char *str1, char *str2)
+{
+	int i;
+	for (i = 0; str1[i] == str2[i]; i++) {
+		if (!str1[i])
+		{
+			return 0;
+		}
+	}
+
+	return str1[i] - str2[i];
+}
