@@ -13,7 +13,6 @@ char keyboard_us[] =
 
 	'-', '=',
 
-	/* TODO: implement \b */
 	'\b', '\t',
 
 	/* lowercase letters 1 */

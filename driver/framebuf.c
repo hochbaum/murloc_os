@@ -39,6 +39,15 @@ uint32_t fb_putc(const unsigned char c, int32_t column, int32_t row, uint8_t att
 			break;
 		}
 
+		case '\t': {
+			for (int i = 0; i < 4; i++)
+			{
+				fb_putc(' ', -1, -1, FB_DEFAULT_ATTRIB);
+			}
+
+			return cursor_calc_offset(column + 4, row);
+		}
+
 		default: {
 			framebuf[offset] = c;
 			framebuf[offset + 1] = attrib;
