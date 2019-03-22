@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_CPU_H
 #define MURLOC_OS_CPU_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 
 /*!
  * Holds the current state of the registers.

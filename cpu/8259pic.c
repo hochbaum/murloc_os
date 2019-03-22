@@ -1,5 +1,5 @@
-#include "8259pic.h"
-#include "../driver/io.h"
+#include <cpu/8259pic.h>
+#include <cpu/io.h>
 
 void pic_acknowledge(uint32_t interrupt)
 {

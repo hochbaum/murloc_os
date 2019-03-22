@@ -1,11 +1,11 @@
-#include "keyboard.h"
-#include "../cpu/idt.h"
-#include "io.h"
-#include "framebuf.h"
-#include "../cpu/8259pic.h"
-#include "../libc/string.h"
+#include <driver/keyboard.h>
+#include <driver/framebuf.h>
+#include <cpu/idt.h>
+#include <cpu/io.h>
+#include <cpu/8259pic.h>
+#include <string.h>
 
-#include "keyboard/keyboard_us.h"
+#include <driver/keyboard_us.h>
 #define LAYOUT keyboard_us
 
 static char keybuffer[256];

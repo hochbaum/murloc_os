@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_IDT_H
 #define MURLOC_OS_IDT_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 #include "cpu.h"
 
 #define IDT_ENTRIES_MAX 256

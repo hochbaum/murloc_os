@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_GDT_H
 #define MURLOC_OS_GDT_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 
 #define GDT_ENTRIES_MAX 5
 

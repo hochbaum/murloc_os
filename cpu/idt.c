@@ -1,9 +1,9 @@
-#include "idt.h"
-#include "../libc/string.h"
-#include "../libc/stdio.h"
-#include "../driver/framebuf.h"
-#include "../driver/io.h"
-#include "8259pic.h"
+#include <cpu/idt.h>
+#include <cpu/io.h>
+#include <cpu/8259pic.h>
+#include <string.h>
+#include <stdio.h>
+#include <driver/framebuf.h>
 
 idt_t idt;
 idt_entry_t idt_entries[IDT_ENTRIES_MAX];

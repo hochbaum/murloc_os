@@ -1,6 +1,6 @@
-#include "framebuf.h"
-#include "io.h"
-#include "../libc/string.h"
+#include <driver/framebuf.h>
+#include <cpu/io.h>
+#include <string.h>
 
 uint32_t cursor_calc_offset(const uint32_t col, const uint32_t row)
 {

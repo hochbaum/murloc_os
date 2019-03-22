@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_KEYBOARD_US_H
 #define MURLOC_OS_KEYBOARD_US_H
 
-#include "../keyboard.h"
+#include "keyboard.h"
 
 char keyboard_us[] =
 {

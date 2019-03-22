@@ -1,7 +1,7 @@
-#include "stdio.h"
-#include "stdint.h"
-#include "../driver/framebuf.h"
-#include "string.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <driver/framebuf.h>
 
 void printf(char *fmt, ...)
 {

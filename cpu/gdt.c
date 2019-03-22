@@ -1,10 +1,10 @@
-#include "gdt.h"
-#include "../libc/stdio.h"
-#include "../libc/string.h"
+#include <cpu/gdt.h>
+#include <stdio.h>
+#include <string.h>
 
 /* may not be changed, as it's the pointer to our GDT. */
-gdt_t gdt;
-gdt_entry_t gdt_entries[GDT_ENTRIES_MAX];
+static gdt_t gdt;
+static gdt_entry_t gdt_entries[GDT_ENTRIES_MAX];
 
 void gdt_initialize()
 {

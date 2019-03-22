@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_FRAMEBUF_H
 #define MURLOC_OS_FRAMEBUF_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 
 #define FB_FRAMEBUF_ADDR 0x00B8000
 

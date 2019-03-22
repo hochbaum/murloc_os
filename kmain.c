@@ -1,10 +1,10 @@
-#include "libc/stdio.h"
-#include "driver/framebuf.h"
-#include "libc/string.h"
-#include "mem/gdt.h"
-#include "cpu/idt.h"
-#include "driver/timer.h"
-#include "driver/keyboard.h"
+#include <stdio.h>
+#include <string.h>
+#include <cpu/gdt.h>
+#include <cpu/idt.h>
+#include <driver/timer.h>
+#include <driver/keyboard.h>
+#include <driver/framebuf.h>
 
 int kmain()
 {

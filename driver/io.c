@@ -1,6 +1,6 @@
-#include "io.h"
-#include "../libc/stdio.h"
-#include "../libc/string.h"
+#include <cpu/io.h>
+#include <stdio.h>
+#include <string.h>
 
 void serial_configure_baud_rate(uint16_t com, uint16_t divisor)
 {

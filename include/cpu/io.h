@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_PORTS_H
 #define MURLOC_OS_PORTS_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 
 #define SERIAL_COM1_BASE 0x3F8
 #define SERIAL_DATA_PORT(base)          (base)

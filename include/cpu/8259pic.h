@@ -1,7 +1,7 @@
 #ifndef MURLOC_OS_PIC_H
 #define MURLOC_OS_PIC_H
 
-#include "../libc/stdint.h"
+#include "../stdint.h"
 
 #define PIC1                0x20
 #define PIC2                0xA0

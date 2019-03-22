@@ -1,9 +1,9 @@
-#include "timer.h"
-#include "../libc/stdint.h"
-#include "../cpu/cpu.h"
-#include "../cpu/idt.h"
-#include "io.h"
-#include "../cpu/8259pic.h"
+#include <driver/timer.h>
+#include <stdint.h>
+#include <cpu/cpu.h>
+#include <cpu/idt.h>
+#include <cpu/io.h>
+#include <cpu/8259pic.h>
 
 uint32_t tick;
 

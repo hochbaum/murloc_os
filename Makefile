@@ -1,6 +1,6 @@
-ASM_SOURCES = $(wildcard *.s mem/*.s cpu/*.s)
-C_SOURCES = $(wildcard *.c driver/*.c libc/*.c mem/*.c cpu/*.c)
-C_HEADERS = $(wildcard *.h driver/*.h libc/*.h mem/*.h cpu/*.h driver/keyboard/*.h)
+ASM_SOURCES = $(wildcard *.s cpu/*.s)
+C_SOURCES = $(wildcard *.c driver/*.c libc/*.c cpu/*.c)
+C_HEADERS = $(wildcard include/*.h include/cpu/*.h include/driver/*.h)
 OBJECTS = ${C_SOURCES:.c=.o} ${ASM_SOURCES:.s=.o}
 
 CC = i386-elf-gcc
@@ -8,7 +8,7 @@ AS = nasm
 LD = /usr/local/i386elfgcc/bin/i386-elf-ld
 GDB = /usr/local/i386elfgcc/bin/i386-elf-gdb
 
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -Iinclude/ -Iinclude/**
 LDFLAGS = -T link.ld -melf_i386
 ASFLAGS = -f elf
 
