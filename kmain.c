@@ -18,12 +18,11 @@ int kmain()
 
 	fb_clear();
 
-	fb_puts("\n\t\t\t\t\t\t\t< ", -1, -1, FB_COLOR_COMBINE(FB_GREEN, FB_BLACK));
-	fb_puts("WELCOME TO MURLOCOS!", -1, -1, FB_COLOR_COMBINE(FB_L_GREEN, FB_BLACK));
-	fb_puts(" >\n", -1, -1, FB_COLOR_COMBINE(FB_GREEN, FB_BLACK));
-
-	printf("\t\t\t\t\t This is a small hobby project by myself,");
-	printf("\n\t\t\t  trying to understand how an OS works under the hood!\n");
+	fb_puts("<", 27, 2, FB_COLOR_COMBINE(FB_GREEN, FB_BLACK));
+	fb_puts("WELCOME TO MURLOCOS!", 29, 2, FB_COLOR_COMBINE(FB_L_GREEN, FB_BLACK));
+	fb_puts(" >", -1, 2, FB_COLOR_COMBINE(FB_GREEN, FB_BLACK));
+	fb_puts("This is a small hobby project by myself", 20, 3, FB_DEFAULT_ATTRIB);
+	fb_puts("trying to understand how an OS works under the hood", 14, 4, FB_DEFAULT_ATTRIB);
 
 	for (int i = 0; i < 5; i++)
 	{
